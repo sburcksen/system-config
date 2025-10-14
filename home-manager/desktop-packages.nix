@@ -5,5 +5,6 @@
     spotify
     vesktop
     obsidian
+    vlc
   ];
 }
