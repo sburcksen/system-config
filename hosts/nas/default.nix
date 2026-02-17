@@ -25,4 +25,6 @@
   services.openssh.settings = {
     PermitRootLogin = "yes";
   };
+
+  networking.firewall.allowedTCPPorts = [ 8123 ];
 }
