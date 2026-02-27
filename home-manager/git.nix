@@ -4,39 +4,10 @@
   programs.git = {
     enable = true;
 
-    userName = "Sam Burcksen";
-    userEmail = "sam.burcksen@gmail.com";
+    settings = {
+      user.name = "Sam Burcksen";
+      user.email = "sam.burcksen@gmail.com";
 
-    aliases = {
-      # List aliases.
-      aliases = "config --get-regexp alias";
-
-      # Pull in remote changes for the current repository and all its submodules.
-      p = "pull --recurse-submodules";
-
-      # Clone a repository including all submodules.
-      c = "clone --recursive";
-
-      # Commit all changes.
-      ca = "!git add ':(exclude,attr:builtin_objectmode=160000)' && git commit -av";
-
-      # View abbreviated SHA, description, and history graph of the latest 20 commits.
-      l = "log --pretty=oneline -n 20 --graph --abbrev-commit";
-
-      # View the current working tree status using the short format.
-      s = "status -s";
-
-      # Show the diff between the latest commit and the current state.
-      d = ''!"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"'';
-
-      # Amend the currently staged files to the latest commit.
-      amend = "commit --amend --reuse-message=HEAD";
-
-      # Show the user email for the current repository.
-      whoami = "config user.email";
-    };
-
-    extraConfig = {
       apply.whitespace = "fix";
 
       branch.sort = "-committerdate";
@@ -71,6 +42,35 @@
 
         # Make `git push` push relevant annotated tags when pushing branches out.
         followTags = true;
+      };
+
+      aliases = {
+        # List aliases.
+        aliases = "config --get-regexp alias";
+
+        # Pull in remote changes for the current repository and all its submodules.
+        p = "pull --recurse-submodules";
+
+        # Clone a repository including all submodules.
+        c = "clone --recursive";
+
+        # Commit all changes.
+        ca = "!git add ':(exclude,attr:builtin_objectmode=160000)' && git commit -av";
+
+        # View abbreviated SHA, description, and history graph of the latest 20 commits.
+        l = "log --pretty=oneline -n 20 --graph --abbrev-commit";
+
+        # View the current working tree status using the short format.
+        s = "status -s";
+
+        # Show the diff between the latest commit and the current state.
+        d = ''!"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"'';
+
+        # Amend the currently staged files to the latest commit.
+        amend = "commit --amend --reuse-message=HEAD";
+
+        # Show the user email for the current repository.
+        whoami = "config user.email";
       };
     };
   };
