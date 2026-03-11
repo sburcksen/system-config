@@ -17,26 +17,10 @@
     nwg-displays # Display Control GUI
     feh # Image Viewer
     jq # JSON parser required for custom workspace switch behavior
-    (catppuccin-sddm.override {
-      flavor = "mocha";
-      accent = "blue";
-      font = "JetBrainsMonoNerdFont-Regular";
-      fontSize = "16";
-      userIcon = false;
-    })
   ];
 
   programs.hyprland.enable = true;
   programs.thunar.enable = true; # File explorer
 
-  # Login manager
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "catppuccin-mocha-blue";
-      package = lib.mkDefault pkgs.kdePackages.sddm;
-    };
-    defaultSession = "hyprland";
-  };
+  services.displayManager.ly.enable = true; # Login manager
 }

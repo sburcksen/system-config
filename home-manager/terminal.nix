@@ -9,7 +9,7 @@
         font = "JetBrainsMonoNerdFont-Regular:size=12";
         pad = "3x0";
       };
-      colors.alpha = 0.8;
+      colors-dark.alpha = 0.8;
     };
   };
 }
