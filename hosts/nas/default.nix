@@ -1,4 +1,4 @@
-{ pkgs, modules, ... }:
+{ pkgs, modules, lib, ... }:
 
 {
   networking.hostName = "nas";
@@ -52,13 +52,87 @@
     };
 
     # Media Server
+    jellyfin = let 
+      dir = "/data_ssd/jellyfin";
+    in {  
+      enable = true;
 
+      openFirewall = true;
+      user = "jellyfin";
+      group = "jellyfin";
+
+      dataDir = "${dir}/data";
+      configDir = "${dir}/config";
+      logDir = "${dir}/log";
+      cacheDir = "${dir}/cache";
+
+      hardwareAcceleration = {
+        enable = true;
+	type = "qsv";
+	device = "/dev/dri/renderD128";
+      };
+
+      transcoding = {
+        enableHardwareEncoding = true;
+	throttleTranscoding = true;
+	maxConcurrentStreams = 2;
+	
+	hardwareEncodingCodecs = {
+	  hevc = true;
+	  av1 = false;
+	};
+
+	hardwareDecodingCodecs = {
+	  h264 = true;
+	  hevc = true;
+	  hevc10bit = true;
+	  vp9 = true;
+	  av1 = true;
+	};
+      };
+    };
+
+    # E-book manager
+    calibre-web = {
+      enable = true;
+      listen.ip = "0.0.0.0";
+      listen.port = 8083;
+      openFirewall = true;
+      options = {
+	calibreLibrary = "/data_ssd/calibre/library";
+	enableBookUploading = true;
+	enableBookConversion = true;
+      };
+    };
+
+    # EBooks
+    readarr = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        auth = {
+	  method = "Basic";
+	  required = "DisabledForLocalAddresses";
+	};
+      };
+    };
+  };
+
+  # For Jellyfin Hardware encoding
+  hardware.graphics.enable = true;
+  users.users.jellyfin.extraGroups = [ "video" ];
+
+  systemd.services.jellyfin.serviceConfig = {
+    ProtectSystem = lib.mkForce "full";
+    ProtectHome = true;
+    PrivateTmp = true;
+    NoNewPrivileges = true;
   };
 
   networking.firewall.allowedTCPPorts = [
-    8123 # HomeAssistant
-    8080 # Trilium
     5232 # Radicale
+    8080 # Trilium
+    8123 # HomeAssistant
   ];
 
 }
