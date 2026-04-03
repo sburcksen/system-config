@@ -24,7 +24,6 @@
       inherit (nixpkgs) lib;
 
       unfreePackages = [
-        "nvidia-x11"
         "spotify"
         "obsidian"
       ];

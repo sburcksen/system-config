@@ -5,7 +5,7 @@
 
   imports = with modules; [
     ./hardware.nix
-    ./nvidia.nix
+    #./nvidia.nix
     common.default
     desktop.default
   ];
