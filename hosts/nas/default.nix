@@ -119,8 +119,19 @@
   };
 
   # For Jellyfin Hardware encoding
-  hardware.graphics.enable = true;
-  users.users.jellyfin.extraGroups = [ "video" ];
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # modern (iHD)
+      vpl-gpu-rt
+      #intel-vaapi-driver # older (i965)
+      #intel-compute-runtime
+      #intel-compute-runtime-legacy1
+    ];
+  };
+  users.users.jellyfin.extraGroups = [ "render" "video" ];
+  #systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
+  #environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
   systemd.services.jellyfin.serviceConfig = {
     ProtectSystem = lib.mkForce "full";
