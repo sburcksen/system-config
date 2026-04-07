@@ -2,7 +2,7 @@ local lsp_servers = {
     'lua_ls',
     'rust_analyzer',
     'clangd',
-    'nil_ls',
+    'nixd'
 }
 
 local lua_ls_config = {
@@ -35,7 +35,6 @@ return {
 
         lsp_zero.configure('lua_ls', lua_ls_config)
         lsp_zero.configure('clangd', clangd_config)
-
         lsp_zero.setup_servers(lsp_servers)
 
         lsp_zero.on_attach(function(client, bufnr)

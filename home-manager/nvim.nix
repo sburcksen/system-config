@@ -4,7 +4,8 @@
   home = {
     packages = with pkgs; [
       lua-language-server
-      nil
+      nixd
+      nixfmt
       clang-tools
       rust-analyzer
     ];
