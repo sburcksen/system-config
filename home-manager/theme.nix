@@ -17,5 +17,7 @@
 
     iconTheme.package = pkgs.gruvbox-plus-icons;
     iconTheme.name = "Gruvbox-Plus-Dark";
+
+    gtk4.theme = null;
   };
 }

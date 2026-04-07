@@ -4,6 +4,8 @@
   programs.git = {
     enable = true;
 
+    signing.format = null;
+
     settings = {
       user.name = "Sam Burcksen";
       user.email = "sam.burcksen@gmail.com";

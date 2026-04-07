@@ -1,4 +1,9 @@
-{ pkgs, modules, lib, ... }:
+{
+  pkgs,
+  modules,
+  lib,
+  ...
+}:
 
 {
   networking.hostName = "nas";
@@ -34,16 +39,16 @@
       enable = true;
       settings = {
         server.hosts = [ "0.0.0.0:5232" ];
-        storage.filesystem_folder = "/data_ssd/radicale/collections"; 
+        storage.filesystem_folder = "/data_ssd/radicale/collections";
         auth = {
           type = "htpasswd";
-	  htpasswd_filename = "/data_ssd/radicale/users";
-	  htpasswd_encryption = "bcrypt";
+          htpasswd_filename = "/data_ssd/radicale/users";
+          htpasswd_encryption = "bcrypt";
         };
       };
     };
 
-    # Note-taking application  
+    # Note-taking application
     trilium-server = {
       enable = true;
       dataDir = "/data_ssd/trilium";
@@ -52,45 +57,47 @@
     };
 
     # Media Server
-    jellyfin = let 
-      dir = "/data_ssd/jellyfin";
-    in {  
-      enable = true;
-
-      openFirewall = true;
-      user = "jellyfin";
-      group = "jellyfin";
-
-      dataDir = "${dir}/data";
-      configDir = "${dir}/config";
-      logDir = "${dir}/log";
-      cacheDir = "${dir}/cache";
-
-      hardwareAcceleration = {
+    jellyfin =
+      let
+        dir = "/data_ssd/jellyfin";
+      in
+      {
         enable = true;
-	type = "qsv";
-	device = "/dev/dri/renderD128";
-      };
 
-      transcoding = {
-        enableHardwareEncoding = true;
-	throttleTranscoding = true;
-	maxConcurrentStreams = 2;
-	
-	hardwareEncodingCodecs = {
-	  hevc = true;
-	  av1 = false;
-	};
+        openFirewall = true;
+        user = "jellyfin";
+        group = "jellyfin";
 
-	hardwareDecodingCodecs = {
-	  h264 = true;
-	  hevc = true;
-	  hevc10bit = true;
-	  vp9 = true;
-	  av1 = true;
-	};
+        dataDir = "${dir}/data";
+        configDir = "${dir}/config";
+        logDir = "${dir}/log";
+        cacheDir = "${dir}/cache";
+
+        hardwareAcceleration = {
+          enable = true;
+          type = "qsv";
+          device = "/dev/dri/renderD128";
+        };
+
+        transcoding = {
+          enableHardwareEncoding = true;
+          throttleTranscoding = true;
+          maxConcurrentStreams = 2;
+
+          hardwareEncodingCodecs = {
+            hevc = true;
+            av1 = false;
+          };
+
+          hardwareDecodingCodecs = {
+            h264 = true;
+            hevc = true;
+            hevc10bit = true;
+            vp9 = true;
+            av1 = true;
+          };
+        };
       };
-    };
 
     # E-book manager
     calibre-web = {
@@ -99,9 +106,9 @@
       listen.port = 8083;
       openFirewall = true;
       options = {
-	calibreLibrary = "/data_ssd/calibre/library";
-	enableBookUploading = true;
-	enableBookConversion = true;
+        calibreLibrary = "/data_ssd/calibre/library";
+        enableBookUploading = true;
+        enableBookConversion = true;
       };
     };
 
@@ -111,9 +118,9 @@
       openFirewall = true;
       settings = {
         auth = {
-	  method = "Basic";
-	  required = "DisabledForLocalAddresses";
-	};
+          method = "Basic";
+          required = "DisabledForLocalAddresses";
+        };
       };
     };
   };
@@ -129,7 +136,10 @@
       #intel-compute-runtime-legacy1
     ];
   };
-  users.users.jellyfin.extraGroups = [ "render" "video" ];
+  users.users.jellyfin.extraGroups = [
+    "render"
+    "video"
+  ];
   #systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
   #environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
