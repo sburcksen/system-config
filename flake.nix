@@ -88,6 +88,7 @@
           inherit specialArgs;
           modules = [
             ./hosts/nas
+	    #homeManager
           ];
         };
       };

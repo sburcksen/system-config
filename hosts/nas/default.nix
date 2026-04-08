@@ -66,7 +66,7 @@
 
         openFirewall = true;
         user = "jellyfin";
-        group = "jellyfin";
+        group = "media";
 
         dataDir = "${dir}/data";
         configDir = "${dir}/config";
@@ -99,6 +99,34 @@
         };
       };
 
+    radarr = {
+      enable = true;
+      openFirewall = true;
+      user = "radarr";
+      group = "media";
+      dataDir = "/data_ssd/radarr";
+      settings = {
+        auth = {
+          method = "Basic";
+          required = "DisabledForLocalAddresses";
+        };
+      };
+    };
+
+    sonarr = {
+      enable = true;
+      openFirewall = true;
+      user = "sonarr";
+      group = "media";
+      dataDir = "/data_ssd/sonarr";
+      settings = {
+        auth = {
+          method = "Basic";
+          required = "DisabledForLocalAddresses";
+        };
+      };
+    };
+
     # E-book manager
     calibre-web = {
       enable = true;
@@ -124,6 +152,8 @@
       };
     };
   };
+
+  users.groups.media = {};
 
   # For Jellyfin Hardware encoding
   hardware.graphics = {
