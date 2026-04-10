@@ -21,7 +21,7 @@
       ...
     }:
     let
-      inherit (nixpkgs) lib;
+      lib = nixpkgs.lib.extend (final: prev: import ./lib.nix { lib = prev; });
 
       unfreePackages = [
         "spotify"
@@ -29,7 +29,6 @@
       ];
 
       specialArgs = {
-        modules = import ./modules lib;
         allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) unfreePackages;
       };
 
@@ -65,34 +64,34 @@
       };
 
       nixosConfigurations = {
-        desktop = nixpkgs.lib.nixosSystem {
+        desktop = lib.nixosSystem {
           system = "x86_64-linux";
-          inherit specialArgs;
+          inherit specialArgs lib;
           modules = [
             ./hosts/desktop
             homeManager
           ];
         };
 
-        laptop = nixpkgs.lib.nixosSystem {
+        laptop = lib.nixosSystem {
           system = "x86_64-linux";
-          inherit specialArgs;
+          inherit specialArgs lib;
           modules = [
             ./hosts/laptop
             homeManager
           ];
         };
 
-        nas = nixpkgs.lib.nixosSystem {
+        nas = lib.nixosSystem {
           system = "x86_64-linux";
-          inherit specialArgs;
+          inherit specialArgs lib;
           modules = [
             ./hosts/nas
-	    #homeManager
+            #homeManager
           ];
         };
       };
 
-      formatter.x86_64-linux = pkgs.nixfmt-tree;
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
     };
 }

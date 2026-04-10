@@ -1,6 +1,9 @@
-{ ... }:
+{ lib, ... }:
 
+with lib;
 {
+  options.desktop.enable = mkEnableOption "desktop options";
+
   imports = [
     ./audio.nix
     ./bluetooth.nix

@@ -1,12 +1,13 @@
-{ modules, ... }:
+{ ... }:
 
 {
   networking.hostName = "Desktop-Nix-SB";
 
-  imports = with modules; [
+  imports = [
     ./hardware.nix
     #./nvidia.nix
-    common.default
-    desktop.default
+    ../../modules
   ];
+
+  desktop.enable = true;
 }
