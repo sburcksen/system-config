@@ -5,8 +5,6 @@
 
   imports = [
     ./hardware.nix
-    ./guest-setup.nix
-    ./kanata.nix
     ../../modules
   ];
 

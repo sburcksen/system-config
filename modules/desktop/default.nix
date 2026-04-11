@@ -7,8 +7,10 @@
     ./audio.nix
     ./bluetooth.nix
     ./devPkgs.nix
+    ./guestSetup.nix
     ./hyprland.nix
     ./login.nix
     ./networking.nix
+    ./nvidia.nix
   ];
 }
