@@ -1,17 +1,26 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 {
-  environment.systemPackages = with pkgs; [
-    ripgrep
-    wget
-    unzip
-    killall
-    fd
-    fzf
-  ];
+  options.common.shell.enable = lib.mkSubOption config.common.enable "shell configuration";
 
-  programs.fish.enable = true;
+  config = lib.mkIf config.common.shell.enable {
+    environment.systemPackages = with pkgs; [
+      ripgrep
+      wget
+      unzip
+      killall
+      fd
+      fzf
+    ];
 
-  # Exclude
-  programs.nano.enable = false;
+    programs.fish.enable = true;
+
+    # Exclude
+    programs.nano.enable = false;
+  };
 }

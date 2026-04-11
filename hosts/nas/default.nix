@@ -1,6 +1,5 @@
 {
   pkgs,
-  modules,
   lib,
   ...
 }:
@@ -8,10 +7,12 @@
 {
   networking.hostName = "nas";
 
-  imports = with modules; [
+  imports = [
     ./hardware.nix
-    common.default
+    ../../modules
   ];
+
+  common.enable = true;
 
   powerManagement = {
     enable = true;
@@ -153,7 +154,7 @@
     };
   };
 
-  users.groups.media = {};
+  users.groups.media = { };
 
   # For Jellyfin Hardware encoding
   hardware.graphics = {

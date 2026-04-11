@@ -64,7 +64,7 @@
       };
 
       nixosConfigurations = {
-        desktop = lib.nixosSystem {
+        pc = lib.nixosSystem {
           system = "x86_64-linux";
           inherit specialArgs lib;
           modules = [

@@ -1,15 +1,14 @@
 { lib, ... }:
 
-with lib;
 {
-  options.desktop.enable = mkEnableOption "desktop options";
+  options.desktop.enable = lib.mkEnableOption "desktop options";
 
   imports = [
     ./audio.nix
     ./bluetooth.nix
-    ./development.nix
+    ./devPkgs.nix
     ./hyprland.nix
     ./login.nix
-    ./wifi.nix
+    ./networking.nix
   ];
 }

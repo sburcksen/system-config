@@ -1,15 +1,17 @@
-{ modules, ... }:
+{ ... }:
 
 {
-  networking.hostName = "Laptop-Nix-SB";
+  networking.hostName = "laptop";
 
-  imports = with modules; [
+  imports = [
     ./hardware.nix
     ./guest-setup.nix
     ./kanata.nix
-    desktop.default
-    common.default
+    ../../modules
   ];
+
+  common.enable = true;
+  desktop.enable = true;
 
   # Overwrite default logind behaviour
   services.logind.settings.Login = {

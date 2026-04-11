@@ -1,26 +1,33 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 {
-  environment.systemPackages = with pkgs; [
-    waybar
-    hyprpaper # Wallpaper
-    hypridle
-    hyprlock # Lockscreen
-    hyprshot # Screenshots
-    wlogout
-    pavucontrol # Audio control GUI
-    cliphist
-    wofi # Program launcher
-    mako # Notifications
-    iwgtk # Wifi GUI
-    brightnessctl
-    nwg-displays # Display Control GUI
-    feh # Image Viewer
-    jq # JSON parser required for custom workspace switch behavior
-  ];
+  options.desktop.hyprland.enable = lib.mkSubOption config.desktop.enable "Hyprland";
 
-  programs.hyprland.enable = true;
-  programs.thunar.enable = true; # File explorer
+  config = lib.mkIf config.desktop.hyprland.enable {
+    environment.systemPackages = with pkgs; [
+      waybar
+      hyprpaper # Wallpaper
+      hypridle
+      hyprlock # Lockscreen
+      hyprshot # Screenshots
+      wlogout
+      pavucontrol # Audio control GUI
+      cliphist
+      wofi # Program launcher
+      mako # Notifications
+      iwgtk # Wifi GUI
+      brightnessctl
+      nwg-displays # Display Control GUI
+      feh # Image Viewer
+      jq # JSON parser required for custom workspace switch behavior
+    ];
 
-  services.displayManager.ly.enable = true; # Login manager
+    programs.hyprland.enable = true;
+    programs.thunar.enable = true; # File explorer
+  };
 }
