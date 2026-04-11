@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  options.desktop.enable = lib.mkEnableOption "desktop options";
+  options.desktop.enable = lib.mkEnableOption "desktop modules";
 
   imports = [
     ./audio.nix

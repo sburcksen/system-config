@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  options.common.enable = lib.mkEnableOption "common options";
+  options.common.enable = lib.mkEnableOption "common modules";
   imports = [
     ./boot.nix
     ./locale.nix
