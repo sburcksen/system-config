@@ -2,6 +2,7 @@
 
 {
   options.common.enable = lib.mkEnableOption "common modules";
+
   imports = [
     ./boot.nix
     ./locale.nix
