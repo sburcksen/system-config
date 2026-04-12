@@ -24,6 +24,5 @@
       inherit allowUnfreePredicate;
     };
 
-    system.stateVersion = "24.11";
   };
 }

@@ -3,5 +3,6 @@
     ./common
     ./desktop
     ./server
+    ./home.nix
   ];
 }

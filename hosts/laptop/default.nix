@@ -22,4 +22,6 @@
     enable = true;
     cpuFreqGovernor = "ondemand";
   };
+
+  system.stateVersion = "24.11";
 }

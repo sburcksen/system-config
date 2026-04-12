@@ -36,4 +36,6 @@
   networking.firewall.allowedTCPPorts = [
     8123 # HomeAssistant
   ];
+
+  system.stateVersion = "24.11";
 }

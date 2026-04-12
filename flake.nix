@@ -30,6 +30,7 @@
 
       specialArgs = {
         allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) unfreePackages;
+        inherit inputs;
       };
 
       pkgs = import nixpkgs {
@@ -40,25 +41,29 @@
         };
       };
 
-      # For usage with nixos
-      homeManager = {
-        imports = [ home-manager.nixosModules.home-manager ];
-        home-manager = {
-          users."sburcksen" = self.homeManagerModules.default;
-          useUserPackages = true;
-          useGlobalPkgs = true;
-          extraSpecialArgs = { inherit inputs; };
-        };
+      # For standalone home-manager usage. Used to generate config.home 
+      dummySystem = lib.nixosSystem {
+        system = "x86_64-linux";
+        inherit specialArgs lib;
+        modules = [
+          ./modules
+          {
+            common.enable = true;
+            desktop = {
+              enable = true;
+            };
+            system.stateVersion = "25.11";
+          }
+        ];
       };
+
     in
     {
-      homeManagerModules.default = import ./home-manager;
-
       # For standalone usage
       homeConfigurations.sburcksen = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
-          self.homeManagerModules.default
+          dummySystem.config.home
         ];
         extraSpecialArgs = { inherit inputs; };
       };
@@ -69,7 +74,6 @@
           inherit specialArgs lib;
           modules = [
             ./hosts/pc
-            homeManager
           ];
         };
 
@@ -78,7 +82,6 @@
           inherit specialArgs lib;
           modules = [
             ./hosts/laptop
-            homeManager
           ];
         };
 
@@ -87,7 +90,6 @@
           inherit specialArgs lib;
           modules = [
             ./hosts/nas
-            #homeManager
           ];
         };
       };

@@ -14,4 +14,6 @@
     guestSetup.enable = false;
     kanata.enable = false;
   };
+
+  system.stateVersion = "24.11";
 }
