@@ -9,7 +9,9 @@
   ];
 
   common.enable = true;
-  common.kanata.enable = false;
-  desktop.enable = true;
-  desktop.guestSetup.enable = false;
+  desktop = {
+    enable = true;
+    guestSetup.enable = false;
+    kanata.enable = false;
+  };
 }

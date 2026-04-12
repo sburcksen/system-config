@@ -9,6 +9,7 @@
     ./devPkgs.nix
     ./guestSetup.nix
     ./hyprland.nix
+    ./kanata.nix
     ./login.nix
     ./networking.nix
     ./nvidia.nix

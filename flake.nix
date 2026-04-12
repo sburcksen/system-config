@@ -68,7 +68,7 @@
           system = "x86_64-linux";
           inherit specialArgs lib;
           modules = [
-            ./hosts/desktop
+            ./hosts/pc
             homeManager
           ];
         };
