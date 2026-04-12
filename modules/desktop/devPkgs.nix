@@ -17,6 +17,9 @@
       gdb
       python3
       rustup
+      ghc
+      haskell-language-server
+      cabal-install
     ];
   };
 }
