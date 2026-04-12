@@ -18,5 +18,11 @@
     environment.systemPackages = [
       pkgs.kanata
     ];
+
+    home = {
+      xdg.configFile = {
+        "kanata".source = ../../dotfiles/kanata;
+      };
+    };
   };
 }
