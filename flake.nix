@@ -41,7 +41,7 @@
         };
       };
 
-      # For standalone home-manager usage. Used to generate config.home 
+      # For standalone home-manager usage. Used to generate config.home
       dummySystem = lib.nixosSystem {
         system = "x86_64-linux";
         inherit specialArgs lib;

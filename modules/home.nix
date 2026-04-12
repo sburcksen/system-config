@@ -17,6 +17,12 @@
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs; };
   };
-  config.home.imports = [ ../home-manager ];
-  config.home.home.stateVersion = config.system.stateVersion;
+  config.home = {
+    imports = [ ../home-manager ];
+
+    home.username = "sburcksen";
+    home.homeDirectory = "/home/sburcksen";
+
+    home.stateVersion = config.system.stateVersion;
+  };
 }
