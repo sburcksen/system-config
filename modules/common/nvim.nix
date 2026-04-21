@@ -32,7 +32,7 @@
       };
 
       xdg.configFile = {
-        "nvim".source = ../../../dotfiles/nvim;
+        "nvim".source = ../../dotfiles/nvim;
       };
     };
   };

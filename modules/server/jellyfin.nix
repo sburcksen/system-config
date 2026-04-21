@@ -59,8 +59,8 @@
       extraPackages = with pkgs; [
         intel-media-driver # modern (iHD)
         vpl-gpu-rt
+        intel-compute-runtime
         #intel-vaapi-driver # older (i965)
-        #intel-compute-runtime
         #intel-compute-runtime-legacy1
       ];
     };
