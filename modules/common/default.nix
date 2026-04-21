@@ -5,6 +5,7 @@
 
   imports = [
     ./boot.nix
+    ./git.nix
     ./locale.nix
     ./monitoringPkgs.nix
     ./nix.nix

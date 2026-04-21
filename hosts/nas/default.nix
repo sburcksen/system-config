@@ -1,5 +1,4 @@
 {
-  pkgs,
   ...
 }:
 
@@ -20,11 +19,6 @@
   };
 
   virtualisation.docker.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    neovim
-    git
-  ];
 
   services.openssh = {
     enable = true;
