@@ -8,6 +8,7 @@
     ./locale.nix
     ./monitoringPkgs.nix
     ./nix.nix
+    ./nvim.nix
     ./shell.nix
     ./user.nix
   ];
