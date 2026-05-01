@@ -24,6 +24,8 @@
     home = {
       imports = [ ../home-manager ];
 
+      #xdg.enable = true;
+
       home.username = "sburcksen";
       home.homeDirectory = "/home/sburcksen";
 

@@ -25,7 +25,6 @@
 
       unfreePackages = [
         "spotify"
-        "obsidian"
       ];
 
       specialArgs = {

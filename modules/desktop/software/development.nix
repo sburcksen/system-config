@@ -23,6 +23,15 @@
     ];
 
     home = {
+      programs.vscode = {
+        enable = true;
+        package = pkgs.vscodium;
+        profiles.default.extensions = with pkgs.vscode-extensions; [
+          vscodevim.vim
+          #anthropic.claude-code
+        ];
+      };
+
       programs.foot = {
         enable = true;
 
