@@ -9,8 +9,8 @@ let
   cfg = config.common.syncthing;
 
   allDevices = {
-    desktop = {
-      id = "";
+    pc = {
+      id = "E72VNQ3-MAA7PJR-27PTZCB-IZMNAWP-6J3JUC3-NGFRBHM-ISHRYPZ-N7TOMAU";
     };
     laptop = {
       id = "M7Z6SAT-NC7PYUL-FESMP35-FRI7BMO-VT7P7SX-JFRY2DC-7SVGCEG-BTDZ6A2";
@@ -26,7 +26,7 @@ let
   allFolders = {
     notes = {
       devices = [
-        "desktop"
+        "pc"
         "laptop"
         "nas"
         "phone"
