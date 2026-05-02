@@ -26,6 +26,7 @@
       feh # Image Viewer
       jq # JSON parser required for custom workspace switch behavior
       spotify
+      logseq
       vlc
     ];
 
