@@ -27,11 +27,12 @@
       jq # JSON parser required for custom workspace switch behavior
       spotify
       vlc
-      nerd-fonts.jetbrains-mono
     ];
 
     programs.hyprland.enable = true;
     programs.thunar.enable = true; # File explorer
+
+    fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
     home = {
       xdg.configFile = {
