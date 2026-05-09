@@ -19,13 +19,9 @@
   };
 
   virtualisation.docker.enable = true;
+  users.users.sburcksen.extraGroups = [ "docker" ];
 
-  services.openssh = {
-    enable = true;
-    settings = {
-      PermitRootLogin = "yes";
-    };
-  };
+  services.openssh.enable = true;
 
   networking.firewall.allowedTCPPorts = [
     8123 # HomeAssistant
