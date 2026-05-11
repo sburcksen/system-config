@@ -1,79 +1,83 @@
-local lsp_servers = {
-    'lua_ls',
-    'rust_analyzer',
-    'clangd',
-    'nixd',
-    'hls',
-}
-
-local lua_ls_config = {
-    settings = {
-        Lua = {
-            diagnostics = { globals = { 'vim' } },
-        }
-    }
-}
-
-local clangd_config = {
-    cmd = {
-        "clangd",
-        "--fallback-style=webkit"
-    }
-}
-
 return {
-    'VonHeikemen/lsp-zero.nvim',
-
+    'neovim/nvim-lspconfig',
     dependencies = {
-        { 'neovim/nvim-lspconfig' },
         { 'hrsh7th/nvim-cmp' },
         { 'hrsh7th/cmp-nvim-lsp' },
         { 'L3MON4D3/LuaSnip' },
     },
-
     config = function()
-        local lsp_zero = require('lsp-zero')
+        vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(args)
+                local bufnr = args.buf
+                local map = function(modes, lhs, rhs, desc)
+                    vim.keymap.set(modes, lhs, rhs, { buffer = bufnr, desc = desc })
+                end
 
-        lsp_zero.configure('lua_ls', lua_ls_config)
-        lsp_zero.configure('clangd', clangd_config)
-        lsp_zero.setup_servers(lsp_servers)
+                -- Default useful keymaps
+                map('n', 'gd', vim.lsp.buf.definition, 'Go to definition')
+                map('n', 'gD', vim.lsp.buf.declaration, 'Go to declaration')
+                map('n', 'gr', vim.lsp.buf.references, 'References')
+                map('n', 'gi', vim.lsp.buf.implementation, 'Go to implementation')
+                map('n', 'K', vim.lsp.buf.hover, 'Hover docs')
+                map('n', '<leader>r', vim.lsp.buf.rename, 'Rename')
+                map('n', '<leader>a', vim.lsp.buf.code_action, 'Code action')
+                map('n', '<leader>d', vim.diagnostic.open_float, 'Diagnostic float')
+                map('n', '[d', vim.diagnostic.goto_prev, 'Prev diagnostic')
+                map('n', ']d', vim.diagnostic.goto_next, 'Next diagnostic')
 
-        lsp_zero.on_attach(function(client, bufnr)
-            -- see :help lsp-zero-keybindings
-            -- to learn the available actions
-            lsp_zero.default_keymaps({ buffer = bufnr })
+                -- Format keybind
+                map({ 'n', 'x' }, 'gf', function()
+                    vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
+                end, 'Format')
 
-            -- Format on save
-            lsp_zero.buffer_autoformat()
+                -- Format on save
+                local client = vim.lsp.get_client_by_id(args.data.client_id)
+                if client and client:supports_method('textDocument/formatting') then
+                    vim.api.nvim_create_autocmd('BufWritePre', {
+                        buffer = bufnr,
+                        callback = function()
+                            vim.lsp.buf.format({ bufnr = bufnr, async = false })
+                        end,
+                    })
+                end
+            end,
+        })
 
-            -- Format keybind
-            vim.keymap.set({ 'n', 'x' }, 'gf', function()
-                vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-            end, { buffer = bufnr, desc = "Auto-Format" })
-        end)
+        vim.lsp.config('lua_ls', {
+            settings = {
+                Lua = {
+                    diagnostics = { globals = { 'vim' } },
+                },
+            },
+        })
 
-        lsp_zero.setup()
+        vim.lsp.config('clangd', {
+            cmd = { 'clangd', '--fallback-style=webkit' },
+        })
+
+        vim.lsp.enable({
+            'lua_ls',
+            'rust_analyzer',
+            'clangd',
+            'nixd',
+            'hls',
+        })
 
         -- Autocompletion
         local cmp = require('cmp')
         cmp.setup({
             sources = {
-                { name = "nvim_lsp" },
-                { name = "path" },
-                { name = "buffer" },
+                { name = 'nvim_lsp' },
+                { name = 'path' },
+                { name = 'buffer' },
             },
-
             mapping = cmp.mapping.preset.insert({
-                ["<C-Space>"] = cmp.mapping.complete(),
-                --['<CR>'] = cmp.mapping.confirm({ select = true }),
+                ['<C-Space>'] = cmp.mapping.complete(),
             }),
-
-            -- Start completion with first item already preselect
             preselect = 'item',
             completion = {
-                completeopt = 'menu,menuone,noinsert'
+                completeopt = 'menu,menuone,noinsert',
             },
-
         })
     end,
 }

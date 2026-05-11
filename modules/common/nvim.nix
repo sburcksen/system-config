@@ -17,6 +17,7 @@
           nixfmt
           clang-tools
           rust-analyzer
+          haskell-language-server
         ];
         sessionVariables = {
           EDITOR = "nvim";
