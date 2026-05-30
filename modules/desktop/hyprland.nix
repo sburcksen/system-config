@@ -28,6 +28,7 @@
       spotify
       logseq
       vlc
+      logseq
     ];
 
     programs.hyprland.enable = true;

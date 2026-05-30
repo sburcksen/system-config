@@ -7,6 +7,8 @@
 }:
 {
   options.home = lib.mkOption {
+    # used by /home/default.nix
+    type = lib.types.deferredModule;
     default = { };
     description = "Home Manager configuration";
   };
