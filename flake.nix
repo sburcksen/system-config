@@ -11,13 +11,19 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{
       self,
-      nixpkgs,
+      firefox-addons,
       home-manager,
+      nixpkgs,
+      nvf,
       ...
     }:
     let

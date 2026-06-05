@@ -21,12 +21,14 @@
       useUserPackages = true;
       useGlobalPkgs = true;
       extraSpecialArgs = { inherit inputs; };
+
+      sharedModules = [
+        inputs.nvf.homeManagerModules.default
+      ];
     };
 
     home = {
       imports = [ ../home-manager ];
-
-      #xdg.enable = true;
 
       home.username = "sburcksen";
       home.homeDirectory = "/home/sburcksen";
