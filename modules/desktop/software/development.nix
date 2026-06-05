@@ -22,49 +22,50 @@
     ];
 
     home = {
-      programs.vscode = {
+      programs.vscodium = {
         enable = true;
-        package = pkgs.vscodium;
 
-        userSettings = {
-          "editor.formatOnSave" = true;
-          "editor.lineNumbers" = "relative";
-          "editor.cursorSurroundingLines" = 8;
-          "editor.cursorSmoothCaretAnimation" = true;
+        profiles.default = {
+          userSettings = {
+            "editor.formatOnSave" = true;
+            "editor.lineNumbers" = "relative";
+            "editor.cursorSurroundingLines" = 8;
+            "editor.cursorSmoothCaretAnimation" = true;
 
-          "security.workspace.trust.enabled" = false;
+            "security.workspace.trust.enabled" = false;
 
-          "git.openRepositoryInParentFolders" = "always";
+            "git.openRepositoryInParentFolders" = "always";
 
-          "haskell.manageHLS" = "PATH";
+            "haskell.manageHLS" = "PATH";
+          };
+
+          extensions = with pkgs.vscode-extensions; [
+            # General
+            vscodevim.vim
+
+            # Haskell
+            haskell.haskell
+            justusadam.language-haskell
+
+            # Nix
+            jnoortheen.nix-ide
+
+            # C/C++
+            llvm-vs-code-extensions.vscode-clangd
+
+            # Lua
+            # sumneko.lua
+
+            # Rust
+            rust-lang.rust-analyzer
+
+            # Python
+            #ms-python.python
+            #ms-python.vscode-pylance
+
+            #anthropic.claude-code
+          ];
         };
-
-        profiles.default.extensions = with pkgs.vscode-extensions; [
-          # General
-          vscodevim.vim
-
-          # Haskell
-          haskell.haskell
-          justusadam.language-haskell
-
-          # Nix
-          jnoortheen.nix-ide
-
-          # C/C++
-          llvm-vs-code-extensions.vscode-clangd
-
-          # Lua
-          # sumneko.lua
-
-          # Rust
-          rust-lang.rust-analyzer
-
-          # Python
-          #ms-python.python
-          #ms-python.vscode-pylance
-
-          #anthropic.claude-code
-        ];
       };
 
       programs.foot = {

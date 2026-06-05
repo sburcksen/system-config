@@ -26,9 +26,8 @@
       feh # Image Viewer
       jq # JSON parser required for custom workspace switch behavior
       spotify
-      logseq
+      #logseq
       vlc
-      logseq
     ];
 
     programs.hyprland.enable = true;

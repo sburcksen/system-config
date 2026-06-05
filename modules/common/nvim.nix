@@ -3,9 +3,7 @@
   config,
   lib,
   ...
-}:
-
-{
+}: {
   options.common.nvim.enable = lib.mkSubOption config.common.enable "Neovim install and configuation";
 
   config = lib.mkIf config.common.nvim.enable {
@@ -26,7 +24,7 @@
 
           spellcheck = {
             enable = true;
-            programmingWordlist.enable = true;
+            programmingWordlist.enable = false;
           };
 
           lsp = {
@@ -62,12 +60,13 @@
 
           visuals = {
             nvim-cursorline.enable = true;
+            nvim-web-devicons.enable = true;
             highlight-undo.enable = true;
           };
 
           statusline.lualine = {
             enable = true;
-            theme = "catppuccin";
+            #theme = "catppuccin";
           };
 
           theme = {
@@ -88,6 +87,19 @@
 
           telescope.enable = true;
 
+          utility = {
+            oil-nvim = {
+              enable = true;
+              setupOpts = {
+                default_file_explorer = true;
+                columns = ["icon"];
+                view_options = {
+                  show_hidden = true;
+                };
+                skip_confirm_for_simple_edits = true;
+              };
+            };
+          };
         };
       };
     };
