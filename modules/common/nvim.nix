@@ -78,8 +78,7 @@
 
           autopairs.nvim-autopairs.enable = true;
 
-          autocomplete.nvim-cmp.enable = true;
-          autocomplete.blink-cmp.enable = false;
+          autocomplete.blink-cmp.enable = true;
 
           snippets.luasnip.enable = true;
 
