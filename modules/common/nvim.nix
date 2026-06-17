@@ -97,9 +97,20 @@
                   show_hidden = true;
                 };
                 skip_confirm_for_simple_edits = true;
+                keymaps = {
+                };
               };
             };
           };
+
+          keymaps = [
+            {
+              key = "-";
+              mode = "n";
+              action = "<cmd>Oil<CR>";
+              desc = "Open parent directory";
+            }
+          ];
         };
       };
     };
