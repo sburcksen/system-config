@@ -3,9 +3,7 @@
   config,
   lib,
   ...
-}:
-
-{
+}: {
   options.desktop.hyprland.enable = lib.mkSubOption config.desktop.enable "Hyprland";
 
   config = lib.mkIf config.desktop.hyprland.enable {
@@ -33,27 +31,25 @@
     programs.hyprland.enable = true;
     programs.thunar.enable = true; # File explorer
 
-    fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+    fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
 
     home = {
-      xdg.configFile = {
-        "waybar".source = ../../dotfiles/waybar;
-      }
-      # Include all files in hypr/ one by one to not make the whole dir write protected
-      // (
-        let
-          hyprConfig = ../../dotfiles/hypr;
-          paths = lib.attrNames (builtins.readDir hyprConfig);
-          configs = map (name: { "hypr/${name}".source = "${hyprConfig}/${name}"; }) paths;
-        in
-        builtins.foldl' (a: b: a // b) { } configs
-      );
-
-      #home.packages = [
-      #  pkgs.pkgs.nerd-fonts.jetbrains-mono
-      #];
+      xdg.configFile =
+        {
+          "waybar".source = ../../dotfiles/waybar;
+        }
+        # Include all files in hypr/ one by one to not make the whole dir write protected
+        // (
+          let
+            hyprConfig = ../../dotfiles/hypr;
+            paths = lib.attrNames (builtins.readDir hyprConfig);
+            configs = map (name: {"hypr/${name}".source = "${hyprConfig}/${name}";}) paths;
+          in
+            builtins.foldl' (a: b: a // b) {} configs
+        );
 
       fonts.fontconfig.enable = true;
+
       services.mako = {
         enable = true;
         settings = {
@@ -66,6 +62,7 @@
       };
 
       home.pointerCursor = {
+        enable = true;
         package = pkgs.bibata-cursors;
         name = "Bibata-Original-Ice";
         size = 24;
@@ -129,7 +126,7 @@
         style = ''
           * {
           	font-family: "JetBrainsMono NF";
-            font-size: 16;  
+            font-size: 16;
             transition: 20ms;
             background-image: none;
           	box-shadow: none;
