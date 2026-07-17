@@ -1,12 +1,15 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options.common.boot.enable = lib.mkSubOption config.common.enable "boot configuration";
 
   config = lib.mkIf config.common.boot.enable {
     boot = {
       loader = {
         systemd-boot.enable = true;
+        systemd-boot.configurationLimit = 10;
         efi.canTouchEfiVariables = true;
       };
 
