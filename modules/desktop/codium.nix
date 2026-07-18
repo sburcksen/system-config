@@ -34,9 +34,6 @@
             "files.trimTrailingWhitespace" = true;
             "files.insertFinalNewline" = true;
 
-            #"workbench.colorTheme" = "Catppuccin Mocha";
-            #"workbench.iconTheme" = "catppuccin-mocha";
-            #"catppuccin-icons.specificFolders" = false;
             "workbench.startupEditor" = "none";
             "workbench.editor.enablePreview" = false;
 
@@ -67,8 +64,6 @@
             # General
             vscodevim.vim
             esbenp.prettier-vscode
-            #catppuccin.catppuccin-vsc
-            #catppuccin.catppuccin-vsc-icons
 
             # Haskell
             haskell.haskell

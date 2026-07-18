@@ -18,7 +18,6 @@
       pavucontrol # Audio control GUI
       cliphist
       wofi # Program launcher
-      mako # Notifications
       iwgtk # Wifi GUI
       brightnessctl
       nwg-displays # Display Control GUI
@@ -63,11 +62,10 @@
 
       home.pointerCursor = {
         enable = true;
-        package = pkgs.bibata-cursors;
-        name = "Bibata-Original-Ice";
-        size = 24;
         gtk.enable = true;
         x11.enable = true;
+        # Todo
+        size = 12;
       };
 
       gtk = {

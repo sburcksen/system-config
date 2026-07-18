@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.common.nvim.enable = lib.mkSubOption config.common.enable "Neovim install and configuation";
 
   config = lib.mkIf config.common.nvim.enable {
@@ -66,6 +67,7 @@
 
           statusline.lualine = {
             enable = true;
+            # Todo
             #theme = "catppuccin";
           };
 
@@ -91,7 +93,7 @@
               enable = true;
               setupOpts = {
                 default_file_explorer = true;
-                columns = ["icon"];
+                columns = [ "icon" ];
                 view_options = {
                   show_hidden = true;
                 };
