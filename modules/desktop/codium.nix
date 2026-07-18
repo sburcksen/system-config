@@ -3,22 +3,11 @@
   lib,
   pkgs,
   ...
-}: {
-  options.desktop.devPkgs.enable = lib.mkSubOption config.desktop.enable "development packages";
+}:
+{
+  options.desktop.codium.enable = lib.mkSubOption config.desktop.enable "VS Codium";
 
-  config = lib.mkIf config.desktop.devPkgs.enable {
-    environment.systemPackages = with pkgs; [
-      gcc
-      clang
-      gnumake
-      cmake
-      gdb
-      python3
-      rustup
-      ghc
-      cabal-install
-    ];
-
+  config = lib.mkIf config.desktop.codium.enable {
     home = {
       programs.vscodium = {
         enable = true;
@@ -45,8 +34,9 @@
             "files.trimTrailingWhitespace" = true;
             "files.insertFinalNewline" = true;
 
-            "workbench.colorTheme" = "Catppuccin Mocha";
-            "workbench.iconTheme" = "catppuccin-mocha";
+            #"workbench.colorTheme" = "Catppuccin Mocha";
+            #"workbench.iconTheme" = "catppuccin-mocha";
+            #"catppuccin-icons.specificFolders" = false;
             "workbench.startupEditor" = "none";
             "workbench.editor.enablePreview" = false;
 
@@ -77,8 +67,8 @@
             # General
             vscodevim.vim
             esbenp.prettier-vscode
-            catppuccin.catppuccin-vsc
-            catppuccin.catppuccin-vsc-icons
+            #catppuccin.catppuccin-vsc
+            #catppuccin.catppuccin-vsc-icons
 
             # Haskell
             haskell.haskell
@@ -105,17 +95,6 @@
         };
       };
 
-      programs.foot = {
-        enable = true;
-
-        settings = {
-          main = {
-            font = "JetBrainsMonoNerdFont-Regular:size=12";
-            pad = "3x0";
-          };
-          colors-dark.alpha = 0.8;
-        };
-      };
     };
   };
 }

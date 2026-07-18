@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.desktop.hyprland.enable = lib.mkSubOption config.desktop.enable "Hyprland";
 
   config = lib.mkIf config.desktop.hyprland.enable {
@@ -31,22 +32,21 @@
     programs.hyprland.enable = true;
     programs.thunar.enable = true; # File explorer
 
-    fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
+    fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
     home = {
-      xdg.configFile =
-        {
-          "waybar".source = ../../dotfiles/waybar;
-        }
-        # Include all files in hypr/ one by one to not make the whole dir write protected
-        // (
-          let
-            hyprConfig = ../../dotfiles/hypr;
-            paths = lib.attrNames (builtins.readDir hyprConfig);
-            configs = map (name: {"hypr/${name}".source = "${hyprConfig}/${name}";}) paths;
-          in
-            builtins.foldl' (a: b: a // b) {} configs
-        );
+      xdg.configFile = {
+        "waybar".source = ../../dotfiles/waybar;
+      }
+      # Include all files in hypr/ one by one to not make the whole dir write protected
+      // (
+        let
+          hyprConfig = ../../dotfiles/hypr;
+          paths = lib.attrNames (builtins.readDir hyprConfig);
+          configs = map (name: { "hypr/${name}".source = "${hyprConfig}/${name}"; }) paths;
+        in
+        builtins.foldl' (a: b: a // b) { } configs
+      );
 
       fonts.fontconfig.enable = true;
 
@@ -75,9 +75,6 @@
 
         theme.package = pkgs.tokyonight-gtk-theme;
         theme.name = "Tokyonight-Dark";
-
-        iconTheme.package = pkgs.gruvbox-plus-icons;
-        iconTheme.name = "Gruvbox-Plus-Dark";
 
         gtk4.theme = null;
       };

@@ -15,6 +15,7 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
@@ -24,6 +25,7 @@
       home-manager,
       nixpkgs,
       nvf,
+      catppuccin,
       ...
     }:
     let

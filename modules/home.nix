@@ -24,6 +24,7 @@
 
       sharedModules = [
         inputs.nvf.homeManagerModules.default
+        inputs.catppuccin.homeModules.catppuccin
       ];
     };
 
