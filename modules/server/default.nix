@@ -1,12 +1,10 @@
-{ lib, ... }:
-
-{
+{lib, ...}: {
   options.server.enable = lib.mkEnableOption "server modules";
 
   imports = [
     ./calibre.nix
     ./jellyfin.nix
+    ./joplin.nix
     ./radicale.nix
-    ./trilium.nix
   ];
 }
