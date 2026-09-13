@@ -37,7 +37,7 @@ in {
       joplin-db = {
         image = "postgres:16";
         environment = {
-          POSTGRES_DATABASE = "joplin";
+          POSTGRES_DB = "joplin";
           POSTGRES_USER = "joplin";
           # Disables passwords completely for this container
           POSTGRES_HOST_AUTH_METHOD = "trust";
