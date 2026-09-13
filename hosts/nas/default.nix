@@ -1,8 +1,4 @@
-{
-  ...
-}:
-
-{
+{...}: {
   networking.hostName = "nas";
 
   imports = [
@@ -11,6 +7,7 @@
   ];
 
   common.enable = true;
+  common.syncthing.enable = false;
   server.enable = true;
 
   powerManagement = {
@@ -19,7 +16,7 @@
   };
 
   virtualisation.docker.enable = true;
-  users.users.sburcksen.extraGroups = [ "docker" ];
+  users.users.sburcksen.extraGroups = ["docker"];
 
   services.openssh.enable = true;
 

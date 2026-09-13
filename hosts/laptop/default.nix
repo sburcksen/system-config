@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   networking.hostName = "laptop";
 
   imports = [
@@ -9,6 +7,7 @@
   ];
 
   common.enable = true;
+  commin.syncthing.enable = false;
   desktop.enable = true;
 
   # Overwrite default logind behaviour
