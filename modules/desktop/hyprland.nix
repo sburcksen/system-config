@@ -24,7 +24,8 @@
       feh # Image Viewer
       jq # JSON parser required for custom workspace switch behavior
       spotify
-      #logseq
+      joplin # Note taking
+      joplin-desktop
       vlc
     ];
 
@@ -71,8 +72,8 @@
       gtk = {
         enable = true;
 
-        theme.package = pkgs.tokyonight-gtk-theme;
-        theme.name = "Tokyonight-Dark";
+        #theme.package = pkgs.tokyonight-gtk-theme;
+        #theme.name = "Tokyonight-Dark";
 
         gtk4.theme = null;
       };
