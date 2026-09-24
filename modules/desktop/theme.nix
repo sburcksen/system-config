@@ -19,11 +19,6 @@
         cursors.accent = "dark";
 
         # Todo
-        firefox.enable = true;
-        firefox.force = true;
-        firefox.accent = "pink";
-
-        # Todo
         fish.enable = true;
         starship.enable = true;
 

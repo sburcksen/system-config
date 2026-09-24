@@ -87,6 +87,7 @@
               ublock-origin
               bitwarden
             ];
+            extensions.force = true;
 
             search = {
               force = true;
