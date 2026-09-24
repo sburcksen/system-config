@@ -18,8 +18,6 @@
         cursors.enable = true;
         cursors.accent = "dark";
 
-        gtk.icon.enable = true;
-
         # Todo
         firefox.enable = true;
         firefox.force = true;

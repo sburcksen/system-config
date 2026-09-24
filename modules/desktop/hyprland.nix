@@ -71,11 +71,17 @@
 
       gtk = {
         enable = true;
+        theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome-themes-extra;
+        };
 
-        #theme.package = pkgs.tokyonight-gtk-theme;
-        #theme.name = "Tokyonight-Dark";
+        gtk4.theme = {
+          name = "Adwaita";
+          package = pkgs.gnome-themes-extra;
+        };
 
-        gtk4.theme = null;
+        colorScheme = "dark";
       };
 
       programs.wlogout = {

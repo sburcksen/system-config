@@ -28,7 +28,7 @@
             "editor.inlineSuggest.enabled" = true;
 
             "editor.cursorSurroundingLines" = 8;
-            "editor.cursorSmoothCaretAnimation" = "on";
+            "editor.cursorSmoothCaretAnimation" = "off";
             "editor.smoothScrolling" = true;
 
             "files.trimTrailingWhitespace" = true;
@@ -45,6 +45,8 @@
             "git.confirmSync" = false;
 
             "telemetry.telemetryLevel" = "off";
+
+            "update.showReleaseNotes" = false;
 
             "extensions.autoUpdate" = false;
             "extensions.autoCheckUpdates" = false;
