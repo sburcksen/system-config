@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.desktop.codium.enable = lib.mkSubOption config.desktop.enable "VS Codium";
 
   config = lib.mkIf config.desktop.codium.enable {
@@ -48,7 +47,7 @@
 
             "update.showReleaseNotes" = false;
 
-            "extensions.autoUpdate" = false;
+            "extensions.autoUpdate" = "off";
             "extensions.autoCheckUpdates" = false;
 
             # Extensions
@@ -91,7 +90,6 @@
           ];
         };
       };
-
     };
   };
 }

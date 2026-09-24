@@ -56,6 +56,7 @@
               enable = true;
               extensions.crates-nvim.enable = false;
             };
+            haskell.enable = true;
             docker.enable = true;
           };
 

@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.desktop.devPkgs.enable = lib.mkSubOption config.desktop.enable "development packages";
 
   config = lib.mkIf config.desktop.devPkgs.enable {
@@ -18,6 +17,8 @@
       rustup
       ghc
       cabal-install
+
+      haskellPackages.haskell-language-server
 
       nixfmt
     ];
