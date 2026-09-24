@@ -3,12 +3,30 @@
   lib,
   pkgs,
   ...
-}:
-{
+}: {
   options.desktop.theme.enable = lib.mkSubOption config.desktop.enable "theming for supported applications";
 
   config = lib.mkIf config.desktop.theme.enable {
     home = {
+      dconf.settings = {
+        "org/gnome/desktop/interface" = {
+          color-scheme = "prefer-dark";
+        };
+      };
+
+      gtk = {
+        enable = true;
+        colorScheme = "dark";
+        theme = {
+          name = "Adwaita";
+          package = pkgs.gnome-themes-extra;
+        };
+        gtk4.theme = {
+          name = "Adwaita";
+          package = pkgs.gnome-themes-extra;
+        };
+      };
+
       catppuccin = {
         enable = true;
         autoEnable = true;

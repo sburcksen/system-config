@@ -3,8 +3,7 @@
   config,
   lib,
   ...
-}:
-{
+}: {
   options.desktop.hyprland.enable = lib.mkSubOption config.desktop.enable "Hyprland";
 
   config = lib.mkIf config.desktop.hyprland.enable {
@@ -30,23 +29,37 @@
     ];
 
     programs.hyprland.enable = true;
+    # See https://wiki.hypr.land/Useful-Utilities/Systemd-start/
+    programs.hyprland.withUWSM = true;
+    home.wayland.windowManager.hyprland.systemd.enable = false;
+
     programs.thunar.enable = true; # File explorer
 
-    fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+    fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
 
     home = {
-      xdg.configFile = {
-        "waybar".source = ../../dotfiles/waybar;
-      }
-      # Include all files in hypr/ one by one to not make the whole dir write protected
-      // (
-        let
-          hyprConfig = ../../dotfiles/hypr;
-          paths = lib.attrNames (builtins.readDir hyprConfig);
-          configs = map (name: { "hypr/${name}".source = "${hyprConfig}/${name}"; }) paths;
-        in
-        builtins.foldl' (a: b: a // b) { } configs
-      );
+      xdg.configFile =
+        {
+          "waybar".source = ../../dotfiles/waybar;
+        }
+        # Include all files in hypr/ one by one to not make the whole dir write protected
+        // (
+          let
+            hyprConfig = ../../dotfiles/hypr;
+            paths = lib.attrNames (builtins.readDir hyprConfig);
+            configs = map (name: {"hypr/${name}".source = "${hyprConfig}/${name}";}) paths;
+          in
+            builtins.foldl' (a: b: a // b) {} configs
+        );
+
+      xdg.portal = {
+        enable = true;
+        config.common.default = "gtk";
+        extraPortals = [
+          pkgs.xdg-desktop-portal-gtk
+          pkgs.xdg-desktop-portal-hyprland
+        ];
+      };
 
       fonts.fontconfig.enable = true;
 
@@ -67,21 +80,6 @@
         x11.enable = true;
         # Todo
         size = 12;
-      };
-
-      gtk = {
-        enable = true;
-        theme = {
-          name = "Adwaita-dark";
-          package = pkgs.gnome-themes-extra;
-        };
-
-        gtk4.theme = {
-          name = "Adwaita";
-          package = pkgs.gnome-themes-extra;
-        };
-
-        colorScheme = "dark";
       };
 
       programs.wlogout = {
