@@ -7,8 +7,9 @@
   ];
 
   common.enable = true;
-  commin.syncthing.enable = false;
+  common.syncthing.enable = false;
   desktop.enable = true;
+  desktop.guestSetup.enable = false;
 
   # Overwrite default logind behaviour
   services.logind.settings.Login = {

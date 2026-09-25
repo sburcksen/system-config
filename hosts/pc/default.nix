@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   networking.hostName = "pc";
 
   imports = [
@@ -7,7 +7,7 @@
   ];
 
   common.enable = true;
-  common.syncthing.enable = true;
+  common.syncthing.enable = false;
   desktop = {
     enable = true;
     guestSetup.enable = false;
